@@ -9,8 +9,6 @@ RUN sed -i '/\# OS/i JAVA_OPTS="$JAVA_OPTS -server -Xms1400M -Xmx1400M -XX:PermS
 
 RUN sed -i 's%redirectPort="8443" />%redirectPort="8443" URIEncoding="UTF-8"/>%g' /opt/apache-tomcat-7.0.72/conf/server.xml
 
-RUN sed -i 's%<Connector port="8080" protocol="HTTP/1.1"%<Connector port="8080" protocol="HTTP/1.1" minSpareThreads="25" maxSpareThreads="75" enableLookups="false" disableUploadTimeout="true"  acceptCount="300"  maxThreads="300" maxProcessors="1000" minProcessors="10" useURIValidationHack="false" compression="on" compressionMinSize="2048" compressableMimeType="text/html,text/xml,application/xml,application/javascript,text/css,text/plain" %g' /opt/apache-tomcat-7.0.72/conf/server.xml
-
 ENV CATALINA_HOME /opt/apache-tomcat-7.0.72  
 ENV PATH $PATH:$CATALINA_HOME/bin  
 ENV PATH $CATALINA_HOME/bin:$PATH
