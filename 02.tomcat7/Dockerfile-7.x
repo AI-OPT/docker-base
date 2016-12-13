@@ -9,7 +9,7 @@ RUN sed -i '/\# OS/i JAVA_OPTS="$JAVA_OPTS  -server -Xms1400M -Xmx1400M -XX:Perm
 
 RUN sed -i 's%redirectPort="8443" />%redirectPort="443" URIEncoding="UTF-8"/>%g' /opt/tomcat/conf/server.xml
 
-RUN sed -i 's%<Connector port="8080" protocol="HTTP/1.1"%<Connector port="8080" protocol="HTTP/1.1"  scheme="https" proxyPort="443" minSpareThreads="25" maxSpareThreads="75" enableLookups="false" disableUploadTimeout="true"  acceptCount="300"  maxThreads="300" maxProcessors="1000" minProcessors="10" useURIValidationHack="false"  %g' /opt/tomcat/conf/server.xml
+RUN sed -i 's%<Connector port="8080" protocol="HTTP/1.1"%<Connector port="8080" protocol="HTTP/1.1"  proxyPort="443" minSpareThreads="25" maxSpareThreads="75" enableLookups="false" disableUploadTimeout="true"  acceptCount="300"  maxThreads="300" maxProcessors="1000" minProcessors="10" useURIValidationHack="false"  %g' /opt/tomcat/conf/server.xml
 
 RUN sed -i 's%unpackWARs="true" autoDeploy="true">%unpackWARs="true" autoDeploy="true"> \n <Valve className="org.apache.catalina.valves.RemoteIpValve" \n       remoteIpHeader="x-forwarded-for" \n       remoteIpProxiesHeader="x-forwarded-by"\n       protocolHeader="x-forwarded-proto"/> \n  %g' /opt/tomcat/conf/server.xml
 
